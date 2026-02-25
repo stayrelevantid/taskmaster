@@ -34,14 +34,7 @@ func initDB() {
 	log.Println("Database connected and migrated successfully.")
 }
 
-func main() {
-	// Load .env file
-	if err := godotenv.Load(); err != nil {
-		log.Println("No .env file found, reading from environment")
-	}
-
-	initDB()
-
+func setupRouter() *gin.Engine {
 	r := gin.Default()
 
 	// --- Public Endpoints ---
@@ -167,6 +160,19 @@ func main() {
 			})
 		})
 	}
+
+	return r
+}
+
+func main() {
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, reading from environment")
+	}
+
+	initDB()
+
+	r := setupRouter()
 
 	port := os.Getenv("PORT")
 	if port == "" {

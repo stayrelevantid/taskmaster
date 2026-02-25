@@ -54,6 +54,10 @@
   - Setup GitHub Secrets (`DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`).
   - Konfigurasi GitHub Actions untuk automated deployment.
   - Deploy image ke Koyeb/Render dan injeksi Environment Variables.
+- **Fase 5: Unit Testing & Dokumentasi**
+  - Refaktorisasi main.go untuk *testability*.
+  - Pembuatan automated testing `go test`.
+  - Pembuatan `README.md` komprehensif.
 
 ## 5. Environment Variables (Secret Management)
 Untuk alasan keamanan, aplikasi tidak boleh berjalan tanpa variabel berikut:
