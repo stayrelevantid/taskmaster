@@ -1,0 +1,10 @@
+.git
+.github
+Dockerfile
+.env
+*.exe
+*.test
+bin/
+vendor/
+node_modules/
+.DS_Store
