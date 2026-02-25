@@ -45,3 +45,12 @@ Secara otomatis akan melakukan langkah-langkah di bawah pada *branch `main`*:
 - Menyusun & menaruh *file* Image yang telah dibentuk (`push`).
 
 *(Jangan lupa menyediakan secrets di Github: `DOCKERHUB_USERNAME` dan `DOCKERHUB_TOKEN`!)*
+
+## ☁️ Deployment ke Render.com
+Proyek ini sudah terkonfigurasi untuk di-deploy secara otomatis ke [Render](https://render.com/) menggunakan metode Blueprint (Infrastructure as Code).
+
+1. Pastikan Anda telah *push* repositori ini ke GitHub Anda.
+2. Login ke Render *Dashboard* dan buat layanan baru dengan tipe **Blueprint**.
+3. Hubungkan ke repositori GitHub Anda ini.
+4. Render akan otomatis membaca file `render.yaml` dan mem-provisioning service web Docker.
+5. **PENTING**: Buka pengaturan layanan aplikasi tersebut di Render, buka tab **Environment**, dan isi nilai `JWT_SECRET` serta `DATABASE_URL` (dari Neon.tech).

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: taskmaster-api
+    env: docker
+    region: singapore # Opsional: singapore, ohio, oregon, frankfurt
+    plan: free # Gunakan free tier
+    branch: main
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: JWT_SECRET
+        sync: false # Jangan pernah simpan secret sebenarnya di file ini! Tambahkan manual di dashboard Render
+      - key: DATABASE_URL
+        sync: false # Tambahkan manual di dashboard Render
