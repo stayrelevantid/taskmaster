@@ -35,3 +35,8 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/taskmaster-api:latest
+    - name: Trigger Render Deploy Hook
+      if: github.event_name != 'pull_request' && env.RENDER_DEPLOY_HOOK != ''
+      env:
+        RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+      run: curl -X POST "$RENDER_DEPLOY_HOOK"
