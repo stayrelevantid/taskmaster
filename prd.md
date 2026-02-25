@@ -53,11 +53,14 @@
 - **Fase 4: CI/CD & Deployment**
   - Setup GitHub Secrets (`DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`).
   - Konfigurasi GitHub Actions untuk automated deployment.
-  - Deploy image ke Koyeb/Render dan injeksi Environment Variables.
+  - Push Docker Image ke Docker Hub.
 - **Fase 5: Unit Testing & Dokumentasi**
   - Refaktorisasi main.go untuk *testability*.
   - Pembuatan automated testing `go test`.
-  - Pembuatan `README.md` komprehensif.
+  - Pembuatan `README.md` komprehensif dan `TaskMaster_API.postman_collection.json`.
+- **Fase 6: Live Deployment (Infrastructure as Code)**
+  - Pembuatan `render.yaml` Blueprint.
+  - Otomatisasi deploy aplikasi container ke **Render.com**.
 
 ## 5. Environment Variables (Secret Management)
 Untuk alasan keamanan, aplikasi tidak boleh berjalan tanpa variabel berikut:
@@ -66,9 +69,9 @@ Untuk alasan keamanan, aplikasi tidak boleh berjalan tanpa variabel berikut:
 - `PORT`: Port aplikasi (default: 8080).
 
 ## 6. Prosedur Pengujian (Testing Strategy)
-- **Unit Testing:** Menjalankan `go test ./...` untuk memastikan fungsi logika benar.
-- **Integration Testing:** Menggunakan Postman Collection untuk menguji alur Login -> Ambil Token -> CRUD Task.
-- **Deployment Testing:** Verifikasi endpoint `/health` setelah aplikasi live di cloud.
+- **Unit Testing:** Menjalankan `go test -v ./...` untuk memastikan fungsi logika benar.
+- **Integration Testing:** Menggunakan file `TaskMaster_API.postman_collection.json` untuk menguji alur Login -> Ambil Token -> CRUD Task secara otomatis.
+- **Deployment Testing:** Verifikasi endpoint `/health` setelah aplikasi live di platform cloud Render.
 
 ## 7. Instruksi Replikasi Cepat (CLI)
 Cukup jalankan satu blok perintah ini untuk inisialisasi awal:
