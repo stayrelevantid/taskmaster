@@ -24,7 +24,7 @@ func TestPing(t *testing.T) {
 
 	var response map[string]string
 	json.Unmarshal(w.Body.Bytes(), &response)
-	assert.Equal(t, "pong - render auto deploy success!", response["message"])
+	assert.Equal(t, "pong - final auto deploy via docker hub & hook success!", response["message"])
 }
 
 func TestHealthCheck(t *testing.T) {

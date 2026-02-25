@@ -58,9 +58,10 @@
   - Refaktorisasi main.go untuk *testability*.
   - Pembuatan automated testing `go test`.
   - Pembuatan `README.md` komprehensif dan `TaskMaster_API.postman_collection.json`.
-- **Fase 6: Live Deployment (Infrastructure as Code)**
-  - Pembuatan `render.yaml` Blueprint.
-  - Otomatisasi deploy aplikasi container ke **Render.com**.
+- **Fase 6: Live Deployment (Advanced CI/CD Hook)**
+  - Mengubah mode service Render ke *Deploy an existing image from a registry*.
+  - Menyiapkan `RENDER_DEPLOY_HOOK` di GitHub Secrets.
+  - Otomatisasi deploy aplikasi: GitHub Actions melakukan Build + Push ke Docker Hub, lalu memicu webhook Render untuk langsung menarik image (*pull*) terbaru ke sisi server produksi.
 
 ## 5. Environment Variables (Secret Management)
 Untuk alasan keamanan, aplikasi tidak boleh berjalan tanpa variabel berikut:

@@ -40,7 +40,7 @@ func setupRouter() *gin.Engine {
 	// --- Public Endpoints ---
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"message": "pong - render auto deploy success!",
+			"message": "pong - final auto deploy via docker hub & hook success!",
 		})
 	})
 

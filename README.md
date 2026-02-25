@@ -46,11 +46,22 @@ Secara otomatis akan melakukan langkah-langkah di bawah pada *branch `main`*:
 
 *(Jangan lupa menyediakan secrets di Github: `DOCKERHUB_USERNAME` dan `DOCKERHUB_TOKEN`!)*
 
-## ☁️ Deployment ke Render.com
-Proyek ini sudah terkonfigurasi untuk di-deploy secara otomatis ke [Render](https://render.com/) menggunakan metode Blueprint (Infrastructure as Code).
+## ☁️ Deployment ke Render.com (via Docker Hub & Webhook)
+Proyek ini dikonfigurasi menggunakan pipeline tingkat lanjut di mana **GitHub Actions** berperan sebagai *builder*, dan **Render** berperan murni sebagai *runner*.
 
-1. Pastikan Anda telah *push* repositori ini ke GitHub Anda.
-2. Login ke Render *Dashboard* dan buat layanan baru dengan tipe **Blueprint**.
-3. Hubungkan ke repositori GitHub Anda ini.
-4. Render akan otomatis membaca file `render.yaml` dan mem-provisioning service web Docker.
-5. **PENTING**: Buka pengaturan layanan aplikasi tersebut di Render, buka tab **Environment**, dan isi nilai `JWT_SECRET` serta `DATABASE_URL` (dari Neon.tech).
+### Konfigurasi Render
+1. Login ke Render *Dashboard* dan buat layanan baru: **New Web Service**.
+2. Pilih opsi **Deploy an existing image from a registry**.
+3. Masukkan Image URL Docker Hub Anda (contoh: `indragiri21/taskmaster-api:latest`) dan klik Next.
+4. Pilih tier *Free*, lalu pada bagian **Environment Variables**, masukkan rahasia Anda (`JWT_SECRET` & `DATABASE_URL`).
+5. Pada bagian **Auto-Deploy**, atur ke **No**.
+6. Simpan konfigurasi, salin URL dari bagian **Deploy Hook** di halaman *Settings* Render Anda.
+
+### Konfigurasi Automasi (GitHub Actions)
+1. Buka Repositori GitHub Anda -> **Settings** -> **Secrets and variables** -> **Actions**.
+2. Tambahkan Secret baru bernama `RENDER_DEPLOY_HOOK` dan isi dengan URL Deploy Hook yang Anda salin dari Render.
+3. Mulai sekarang, setiap kali Anda mem-*push* kode ke branch `main`, GitHub Actions akan:
+   - Menjalankan unit tests (`go test`).
+   - Melakukan *Build* dan *Push* layer Docker ke akun Docker Hub Anda.
+   - Mengirim trigger (via webhook `curl`) ke Render.
+   - Render secara instan akan menukar kontainernya ke versi image terbaru dari Docker Hub tanpa hambatan (*Zero-Downtime Deployment*).
