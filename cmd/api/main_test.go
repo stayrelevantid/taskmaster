@@ -12,6 +12,21 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestPing(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	r := setupRouter()
+
+	req, _ := http.NewRequest("GET", "/ping", nil)
+	w := httptest.NewRecorder()
+	r.ServeHTTP(w, req)
+
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	var response map[string]string
+	json.Unmarshal(w.Body.Bytes(), &response)
+	assert.Equal(t, "pong - render auto deploy success!", response["message"])
+}
+
 func TestHealthCheck(t *testing.T) {
 	// Set Gin to Test Mode
 	gin.SetMode(gin.TestMode)

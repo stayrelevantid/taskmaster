@@ -38,6 +38,12 @@ func setupRouter() *gin.Engine {
 	r := gin.Default()
 
 	// --- Public Endpoints ---
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "pong - render auto deploy success!",
+		})
+	})
+
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"success": true,
