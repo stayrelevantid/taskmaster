@@ -57,7 +57,7 @@
 - **Fase 5: Unit Testing & Dokumentasi**
   - Refaktorisasi main.go untuk *testability*.
   - Pembuatan automated testing `go test`.
-  - Pembuatan `README.md` komprehensif dan `TaskMaster_API.postman_collection.json`.
+  - Pembuatan `README.md` komprehensif dan `docs/TaskMaster_API.postman_collection.json`.
 - **Fase 6: Live Deployment (Advanced CI/CD Hook)**
   - Mengubah mode service Render ke *Deploy an existing image from a registry*.
   - Menyiapkan `RENDER_DEPLOY_HOOK` di GitHub Secrets.
@@ -71,7 +71,7 @@ Untuk alasan keamanan, aplikasi tidak boleh berjalan tanpa variabel berikut:
 
 ## 6. Prosedur Pengujian (Testing Strategy)
 - **Unit Testing:** Menjalankan `go test -v ./...` untuk memastikan fungsi logika benar.
-- **Integration Testing:** Menggunakan file `TaskMaster_API.postman_collection.json` untuk menguji alur Login -> Ambil Token -> CRUD Task secara otomatis.
+- **Integration Testing:** Menggunakan file `docs/TaskMaster_API.postman_collection.json` untuk menguji alur Login -> Ambil Token -> CRUD Task secara otomatis.
 - **Deployment Testing:** Verifikasi endpoint `/health` setelah aplikasi live di platform cloud Render.
 
 ## 7. Instruksi Replikasi Cepat (CLI)
